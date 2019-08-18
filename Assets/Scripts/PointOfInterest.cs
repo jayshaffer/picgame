@@ -39,7 +39,6 @@ public class PointOfInterest : MonoBehaviour
         }
         LayerMask mask = LayerMask.GetMask("poi");
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, bonusRadius, mask);
-        Debug.Log(hitColliders.Length);
         float newVal = value * bonusMultiplier;
         value = value / degredationPercentage;
         if (value < 1)

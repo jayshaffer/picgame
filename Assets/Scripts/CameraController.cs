@@ -9,8 +9,8 @@ public class CameraController : MonoBehaviour
     Collider2D coll;
     List<GameObject> pointsOfInterest = new List<GameObject>();
     Vector3 mousePosition;
-    int width = 3;
-    int height = 2;
+    public int width = 3;
+    public int height = 2;
     GameObject player;
     PlayerController playerController;
     Scoring scoring;

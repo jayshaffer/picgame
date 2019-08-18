@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour
     int height = 2;
     GameObject player;
     PlayerController playerController;
+    Scoring scoring;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,9 @@ public class CameraController : MonoBehaviour
        if(player == null){
            player = GameObject.FindWithTag("Player");
            playerController = player.GetComponent<PlayerController>();
+       }
+       if(scoring == null){
+           scoring = GameObject.FindWithTag("score").GetComponent<Scoring>();
        }
         coll = GetComponent<Collider2D>();
         transform.localScale = new Vector3(width, height, 0);
@@ -48,7 +52,7 @@ public class CameraController : MonoBehaviour
             PointOfInterest poi = obj.GetComponent<PointOfInterest>();
             total += poi.CalculateValue();
         }
-        Debug.Log(total);
+        scoring.score += (int)total;
     }
 
     void OnTriggerExit2D(Collider2D other) {

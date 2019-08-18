@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Jump : MonoBehaviour
 {
-    bool onGround = false;
+    public bool onGround = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,10 +15,6 @@ public class Jump : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public bool JumpAllowed(){
-       return onGround; 
     }
 
     void OnTriggerEnter2D(Collider2D collider) {

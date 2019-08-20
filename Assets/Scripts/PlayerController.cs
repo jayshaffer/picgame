@@ -13,7 +13,10 @@ public class PlayerController : MonoBehaviour
     public float jetPackForce = 5;
     public float jumpDelay = 1f;
     public GameObject pictureBox;
+    public GameObject sprite;
+    SpriteRenderer spriteRenderer;
     Jump jump;
+    Fuel fuel;
     bool jumping = false;
     float nextJumpAction;
 
@@ -23,8 +26,11 @@ public class PlayerController : MonoBehaviour
         jumpDetect = GameObject.FindWithTag("jumpdetect");
         jump = jumpDetect.GetComponent<Jump>();
         nextJumpAction = Time.time;
-        if(pictureBox == null){
-
+        if(fuel == null){
+            fuel = GameObject.FindWithTag("fuel").GetComponent<Fuel>();
+        }
+        if(sprite != null){
+            spriteRenderer = sprite.gameObject.GetComponent<SpriteRenderer>();
         }
     }
 
@@ -37,6 +43,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         float x = Input.GetAxis("Horizontal");
+        spriteRenderer.flipX = x <= 0;
         transform.Translate(Vector3.ClampMagnitude(new Vector3(x, 0, 0) * speed * Time.deltaTime, maxSpeed));
         if (rb.velocity.magnitude > maxSpeed)
         {
@@ -48,6 +55,10 @@ public class PlayerController : MonoBehaviour
 
     void Jetpack()
     {
+        if(fuel.remaining <= 0){
+            return;
+        }
+        fuel.remaining -= 1;
         rb.AddForce(transform.up * jetPackForce);
     }
 

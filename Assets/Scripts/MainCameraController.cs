@@ -20,10 +20,10 @@ public class MainCameraController : MonoBehaviour
     }
 
     void FixedUpdate(){
-        float dist = Vector3.Distance(transform.position, player.transform.position) / 10;
-        float interpolation = (dist + followSpeed) * Time.deltaTime;
+        float dist = Vector3.Distance(transform.position, player.transform.position) / 100;
+        float interpolation = (dist + (followSpeed / 100));
         transform.position = new Vector3(transform.position.x, transform.position.y, -10);
-        Vector3 newTrans = Vector3.Lerp(transform.position, player.transform.position, dist);
+        Vector3 newTrans = Vector3.Lerp(transform.position, player.transform.position, interpolation);
         newTrans.z = transform.position.z;
         transform.position = newTrans;
     }
